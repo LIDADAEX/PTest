@@ -20,7 +20,6 @@
 #include "main.h"
 #include "can.h"
 #include "dma.h"
-#include "i2c.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -91,21 +90,20 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
-  MX_I2C3_Init();
   MX_CAN1_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+	ITR_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  itrLoop();
+	  ITR_Loop();
 	  
     /* USER CODE END WHILE */
-	  
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

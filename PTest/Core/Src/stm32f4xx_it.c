@@ -56,8 +56,6 @@
 
 /* External variables --------------------------------------------------------*/
 extern CAN_HandleTypeDef hcan1;
-extern DMA_HandleTypeDef hdma_i2c3_rx;
-extern DMA_HandleTypeDef hdma_i2c3_tx;
 extern DMA_HandleTypeDef hdma_usart2_rx;
 extern DMA_HandleTypeDef hdma_usart2_tx;
 extern UART_HandleTypeDef huart2;
@@ -192,7 +190,7 @@ void SysTick_Handler(void)
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
   /* USER CODE BEGIN SysTick_IRQn 1 */
-
+  HAL_SYSTICK_Callback();
   /* USER CODE END SysTick_IRQn 1 */
 }
 
@@ -202,34 +200,6 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f4xx.s).                    */
 /******************************************************************************/
-
-/**
-  * @brief This function handles DMA1 stream1 global interrupt.
-  */
-void DMA1_Stream1_IRQHandler(void)
-{
-  /* USER CODE BEGIN DMA1_Stream1_IRQn 0 */
-
-  /* USER CODE END DMA1_Stream1_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_i2c3_rx);
-  /* USER CODE BEGIN DMA1_Stream1_IRQn 1 */
-
-  /* USER CODE END DMA1_Stream1_IRQn 1 */
-}
-
-/**
-  * @brief This function handles DMA1 stream4 global interrupt.
-  */
-void DMA1_Stream4_IRQHandler(void)
-{
-  /* USER CODE BEGIN DMA1_Stream4_IRQn 0 */
-
-  /* USER CODE END DMA1_Stream4_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_i2c3_tx);
-  /* USER CODE BEGIN DMA1_Stream4_IRQn 1 */
-
-  /* USER CODE END DMA1_Stream4_IRQn 1 */
-}
 
 /**
   * @brief This function handles DMA1 stream5 global interrupt.

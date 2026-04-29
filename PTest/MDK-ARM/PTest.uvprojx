@@ -81,7 +81,7 @@
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
-            <RunUserProg2>0</RunUserProg2>
+            <RunUserProg2>1</RunUserProg2>
             <UserProg1Name></UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F446xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\userFile</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../userFile</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -415,11 +415,6 @@
               <FilePath>../Core/Src/dma.c</FilePath>
             </File>
             <File>
-              <FileName>i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/i2c.c</FilePath>
-            </File>
-            <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/usart.c</FilePath>
@@ -433,6 +428,11 @@
               <FileName>stm32f4xx_hal_msp.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/stm32f4xx_hal_msp.c</FilePath>
+            </File>
+            <File>
+              <FileName>retarget.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\retarget.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -510,16 +510,6 @@
               <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_i2c_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_hal_uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c</FilePath>
@@ -555,19 +545,47 @@
           <GroupName>middleware</GroupName>
           <Files>
             <File>
-              <FileName>I2C_soft.cpp</FileName>
+              <FileName>I2C_Soft.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\userFile\middleware\IIC\I2C_soft.cpp</FilePath>
+              <FilePath>..\userFile\middleware\IIC\I2C_Soft.cpp</FilePath>
             </File>
             <File>
-              <FileName>I2C_soft.h</FileName>
+              <FileName>I2C_Soft.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\userFile\middleware\IIC\I2C_soft.h</FilePath>
+              <FilePath>..\userFile\middleware\IIC\I2C_Soft.h</FilePath>
+            </File>
+            <File>
+              <FileName>USART_Hard.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\userFile\middleware\USART\USART_Hard.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>USART_Hard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\userFile\middleware\USART\USART_Hard.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>driver</GroupName>
+          <Files>
+            <File>
+              <FileName>INA226.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\userFile\driver\INA226\INA226.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>INA226.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\userFile\driver\INA226\INA226.h</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>
+        </Group>
+        <Group>
+          <GroupName>::Compiler</GroupName>
         </Group>
       </Groups>
     </Target>
@@ -578,6 +596,24 @@
     <components>
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="6.2.0" condition="ARMv6_7_8-M Device" ymlID="CMSIS:CORE">
         <package name="CMSIS" schemaVersion="1.7.53" url="https://www.keil.com/pack/" vendor="ARM" version="6.3.0"/>
+        <targetInfos>
+          <targetInfo name="PTest"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="I/O" Csub="STDERR" Cvariant="Breakpoint" Cvendor="Keil" Cversion="1.2.0" condition="ARMCC Cortex-M" ymlID="Compiler&amp;ARM Compiler:I/O:STDERR&amp;Breakpoint">
+        <package name="ARM_Compiler" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="1.7.2"/>
+        <targetInfos>
+          <targetInfo name="PTest"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="I/O" Csub="STDOUT" Cvariant="User" Cvendor="Keil" Cversion="1.2.0" condition="ARMCC Cortex-M" ymlID="Compiler&amp;ARM Compiler:I/O:STDOUT&amp;User">
+        <package name="ARM_Compiler" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="1.7.2"/>
+        <targetInfos>
+          <targetInfo name="PTest"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="I/O" Csub="TTY" Cvariant="User" Cvendor="Keil" Cversion="1.2.0" condition="ARMCC Cortex-M" ymlID="Compiler&amp;ARM Compiler:I/O:TTY&amp;User">
+        <package name="ARM_Compiler" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="1.7.2"/>
         <targetInfos>
           <targetInfo name="PTest"/>
         </targetInfos>

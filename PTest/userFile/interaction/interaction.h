@@ -6,8 +6,8 @@
 extern "C" {
 #endif
 
-// Declarations
-void itrLoop();
+void ITR_Init(void);
+void ITR_Loop();
 
 #ifdef __cplusplus
 }
